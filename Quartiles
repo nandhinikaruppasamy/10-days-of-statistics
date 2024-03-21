@@ -1,0 +1,114 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'quartiles' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts INTEGER_ARRAY arr as parameter.
+     */
+
+    public static List<Integer> quartiles(List<Integer> arr) {
+    // Write your code here
+    Collections.sort(arr);
+    int n=arr.size();
+    List<Integer> list = new ArrayList<>();
+    
+    if(n%2 != 0){
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        int sum1 = 0,sum2 = 0;
+        int osum1=0,osum2=0;
+        int mid = n/2; 
+        int ele = arr.get(mid);
+        for(int i=0;i<mid;i++){
+            list1.add(arr.get(i));
+        }
+        for(int i=mid+1;i<n;i++){
+            list2.add(arr.get(i));
+        }
+        int a = 0;
+        int b = list1.size()-1;
+        while(a<b-1){
+            a++;b--;
+        }
+        sum1=list1.get(a)+list1.get(b);
+        osum1 = sum1/2;
+      //  osum1=sum1/list1.size(); 
+        list.add(osum1);  
+        list.add(ele);
+        sum2=list2.get(a)+list2.get(b);
+        osum2 = sum2/2;
+       // osum2=sum2/list2.size();   
+        list.add(osum2);  
+     }
+    else{
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        int i=0;
+        int j=arr.size()-1;
+        int sum1 = 0,sum2 = 0;
+        int osum1 = 0, osum2 = 0;
+        while(i<j-1){
+            i++;j--;
+        }
+        int mid = (arr.get(i)+arr.get(j))/2;
+        for(int k=0;k<=i;k++){
+            list1.add(arr.get(k));
+        }
+        for(int k=j;k<n;k++){
+            list2.add(arr.get(k));
+        }
+        int a = 0;
+        int b = list1.size()-1;
+        while(a<b-1){
+            a++;b--;
+        }
+        sum1 = list1.get(a)+list1.get(b);
+        osum1 = sum1/2; 
+        list.add(osum1);
+        list.add(mid);
+        sum2 = list2.get(a) +list2.get(b);
+        osum2 = sum2/2;
+        list.add(osum2);
+    } 
+     return list;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Integer> data = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+            .map(Integer::parseInt)
+            .collect(toList());
+
+        List<Integer> res = Result.quartiles(data);
+
+        bufferedWriter.write(
+            res.stream()
+                .map(Object::toString)
+                .collect(joining("\n"))
+            + "\n"
+        );
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
