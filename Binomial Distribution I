@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc = new Scanner(System.in);
+        double m = sc.nextDouble();
+        double n = sc.nextDouble();
+        double p = m / (m + n);
+        double q = 1 - p;
+        double res = 0;
+        for (int i = 3; i <= 6; i++) {
+            double c = combinations(6, i);
+            res += c * Math.pow(p, i) * Math.pow(q, 6 - i);
+        }
+        System.out.printf("%.3f", res);
+    }
+    
+    public static double combinations(int a, int b) {
+        double f = 1;
+        for (int i = 1; i <= b; i++) {
+            f *= (double) (a - b + i) / i;
+        }
+        return f;
+    }
+}
