@@ -1,0 +1,19 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc = new Scanner(System.in);
+        int p1 = sc.nextInt();
+        int p2 = sc.nextInt();
+        int n = sc.nextInt();
+        double p = (double)p1/p2;
+        double q = 1-p;
+        double res = 0.0;
+        for(int i=1;i<=n;i++)
+            res += (double) p*Math.pow(q,i-1);
+        System.out.printf("%.3f",res);
+    }
+}
