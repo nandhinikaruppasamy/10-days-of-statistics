@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double mean = sc.nextDouble();
+        double x = sc.nextDouble();
+        double res = Math.pow(Math.E, -mean) * Math.pow(mean, x);
+        double fac = factorial(x);
+        double a = res / fac;
+        System.out.printf("%.3f", a);
+    }
+
+    public static double factorial(double n) {
+        if (n == 0) return 1;
+        double result = 1;
+        for (int i = 1; i <= n; i++) {
+            result *= i;
+        }
+        return result;
+    }
+}
