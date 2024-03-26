@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+         Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        double x[] = new double [n];
+        double y[] = new double [n];
+        double d[] = new double [n];
+        ArrayList<Double> ax = new ArrayList<Double>();
+        ArrayList<Double> ay = new ArrayList<Double>();
+
+        double sum = 0;
+        for(int i=0;i<n;i++)
+        {
+            x[i] = sc.nextDouble();
+            ax.add(x[i]);
+        }
+        for(int i=0;i<n;i++)
+        {
+            y[i] = sc.nextDouble();
+            ay.add(y[i]);
+        }
+
+        Collections.sort(ax);
+        Collections.sort(ay);
+        
+        for(int i=0;i<n;i++)
+        {
+            d[i] = Math.pow(ax.indexOf(x[i]) -ay.indexOf(y[i]),2);
+            sum = sum + d[i];
+        }
+        double result = 1 - (6*sum)/(n*(Math.pow(n,2))-1);
+        System.out.format("%.3f",result);
+    }
+}
